@@ -37,7 +37,7 @@ func GenerateBalance() int64 {
 
 func GenerateCurrency() string {
 	currs := []string{
-		"EUR", "USD", "YEN",
+		"EUR", "USD", "YEN", "NGN",
 	}
 	return currs[rand.Intn(len(currs))]
 }
