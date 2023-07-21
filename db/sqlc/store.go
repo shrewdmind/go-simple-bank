@@ -51,39 +51,53 @@ func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	return tx.Commit()
 }
 
-func (store *Store) TransferTx(ctx context.Context, args TransferTxParam) (TransferTxResult, error) {
+func (store *Store) TransferTx(ctx context.Context, arg TransferTxParam) (TransferTxResult, error) {
 	var result TransferTxResult
 
 	err := store.execTx(ctx, func(q *Queries) error {
 		var err error
 
 		result.Transfer, err = q.CreateTransfer(ctx, CreateTransferParams{
-			FromAccountID: 	args.FromAccountID,
-			ToAccountID: 	args.ToAccountID,
-			Amount: 		args.Amount,
+			FromAccountID: 	arg.FromAccountID,
+			ToAccountID: 	arg.ToAccountID,
+			Amount: 		arg.Amount,
 		})
 		if err != nil {
 			return err
 		}
 
 		result.FromEntry, err = q.CreateEntry(ctx, CreateEntryParams{
-			AccountID: 		args.FromAccountID,
-			Amount: 		-args.Amount,
+			AccountID: 		arg.FromAccountID,
+			Amount: 		-arg.Amount,
 		})
 		if err != nil {
 			return err
 		}
 
 		result.ToEntry, err = q.CreateEntry(ctx, CreateEntryParams{
-			AccountID: 		args.ToAccountID,
-			Amount: 		args.Amount,
+			AccountID: 		arg.ToAccountID,
+			Amount: 		arg.Amount,
 		})
 		if err != nil {
 			return err
 		}
 
-		//TODO: deadlock impl
-  
+		result.FromAccount, err = q.UpdateAccountBalance(ctx, UpdateAccountBalanceParams{
+			ID: arg.FromAccountID,
+			Account: - arg.Amount,
+		})
+		if err != nil {
+			return err
+		}
+
+		result.ToAccount, err = q.UpdateAccountBalance(ctx, UpdateAccountBalanceParams{
+			ID: arg.ToAccountID,
+			Account: arg.Amount,
+		})
+		if err != nil {
+			return err
+		}
+
 		return nil
 	})
 	

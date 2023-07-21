@@ -24,7 +24,8 @@ func TestTransferTx(t *testing.T ) {
 
 	for i := 0; i < n; i++ {
 		go func() {
-			result, err := store.TransferTx(context.Background(), TransferTxParam{
+			ctx := context.Background()
+			result, err := store.TransferTx(ctx, TransferTxParam{
 				FromAccountID: account1.ID,
 			 	ToAccountID: account2.ID,
 				Amount: amount,
@@ -81,7 +82,7 @@ func TestTransferTx(t *testing.T ) {
 		
 		toAccount := result.ToAccount
 		require.NotEmpty(t, toAccount)
-		require.Equal(t, account1.ID, toAccount.ID)	
+		require.Equal(t, account2.ID, toAccount.ID)	
 		
 		fmt.Println(">>> tx", fromAccount.Balance, toAccount.Balance)
 		diff1 := account1.Balance - fromAccount.Balance
