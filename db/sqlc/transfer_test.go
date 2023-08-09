@@ -52,7 +52,7 @@ func TestGetTransfer(t *testing.T) {
 func TestListTransfer(t * testing.T) {
 	accounts := createTransferAccounts(t)
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 15; i++ {
 		createRandomTransfer(t, accounts)
 	}
 
