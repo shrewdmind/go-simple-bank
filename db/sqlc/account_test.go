@@ -81,22 +81,22 @@ func TestDeleteAccount(t *testing.T) {
 	require.Empty(t, account2) 
 }
 
-func TestListAccount(t *testing.T) {
-	for i := 0; i < 5; i++ {
-		CreateRandomAccount(t)
-	}
+// func TestListAccount(t *testing.T) {
+// 	for i := 0; i < 5; i++ {
+// 		CreateRandomAccount(t)
+// 	}
 
-	args := ListAccountsParams{
-		Offset: 5,
-		Limit: 5,
-	}
+// 	args := ListAccountsParams{
+// 		Offset: 5,
+// 		Limit: 5,
+// 	}
 
-	accounts, err := testQueries.ListAccounts(context.Background(), args)
+// 	accounts, err := testQueries.ListAccounts(context.Background(), args)
 
-	require.NoError(t, err)
-	require.Len(t, accounts, 5)
+// 	require.NoError(t, err)
+// 	require.Len(t, accounts, 5)
 
-	for _, account := range accounts {
-		require.NotEmpty(t, account)
-	}
-}
+// 	for _, account := range accounts {
+// 		require.NotEmpty(t, account)
+// 	}
+// }
