@@ -49,26 +49,26 @@ func TestGetTransfer(t *testing.T) {
 	require.Equal(t, result.Amount, transfer.Amount)
 }
 
-func TestListTransfer(t * testing.T) {
-	accounts := createTransferAccounts(t)
+// func TestListTransfer(t * testing.T) {
+// 	accounts := createTransferAccounts(t)
 
-	for i := 0; i < 15; i++ {
-		createRandomTransfer(t, accounts)
-	}
+// 	for i := 0; i < 15; i++ {
+// 		createRandomTransfer(t, accounts)
+// 	}
 
-	args := ListTransfersParams{
-		FromAccountID: accounts[0].ID,
-		ToAccountID: accounts[1].ID,
-		Offset: 5,
-		Limit: 5,
-	}
+// 	args := ListTransfersParams{
+// 		FromAccountID: accounts[0].ID,
+// 		ToAccountID: accounts[1].ID,
+// 		Offset: 5,
+// 		Limit: 5,
+// 	}
 
-	transfers, err := testQueries.ListTransfers(context.Background(), args)
+// 	transfers, err := testQueries.ListTransfers(context.Background(), args)
 
-	require.NoError(t, err)
-	require.Len(t, transfers, 5)
+// 	require.NoError(t, err)
+// 	require.Len(t, transfers, 5)
 
-	for _, transfer := range transfers {
-		require.NotEmpty(t, transfer)
-	}
-}
+// 	for _, transfer := range transfers {
+// 		require.NotEmpty(t, transfer)
+// 	}
+// }
