@@ -60,7 +60,7 @@ func TestUpdateEntry(t *testing.T) {
 }
 
 // func TestListEntry(t *testing.T) {
-// 	for i := 0; i < 10; i++ {
+// 	for i := 0; i < 5; i++ {
 // 		createRandomEntry(t)
 // 	}
 
