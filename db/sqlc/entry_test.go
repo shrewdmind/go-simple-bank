@@ -59,22 +59,22 @@ func TestUpdateEntry(t *testing.T) {
 	require.WithinDuration(t, entry.CreatedAt, entryNew.CreatedAt, time.Second)
 }
 
-// func TestListEntry(t *testing.T) {
-// 	for i := 0; i < 5; i++ {
-// 		createRandomEntry(t)
-// 	}
+func TestListEntry(t *testing.T) {
+	for i := 0; i < 5; i++ {
+		createRandomEntry(t)
+	}
 
-// 	args := ListEntriesParams{
-// 		Offset: 5,
-// 		Limit: 5,
-// 	}
+	args := ListEntriesParams{
+		Offset: 5,
+		Limit: 5,
+	}
 
-// 	entries, err := testQueries.ListEntries(context.Background(), args)
+	entries, err := testQueries.ListEntries(context.Background(), args)
 
-// 	require.NoError(t, err)
-// 	require.Len(t, entries, 5)
+	require.NoError(t, err)
+	require.Len(t, entries, 5)
 
-// 	for _, entry := range entries {
-// 		require.NotEmpty(t, entry)
-// 	}
-// }
+	for _, entry := range entries {
+		require.NotEmpty(t, entry)
+	}
+}

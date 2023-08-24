@@ -30,7 +30,7 @@ RETURNING *;
 
 -- name: UpdateAccountBalance :one
 UPDATE accounts
-  set balance = balance + sqlc.arg(account)
+  set balance = balance + sqlc.arg(amount)
 WHERE id = sqlc.arg(id)
 RETURNING *;
 
