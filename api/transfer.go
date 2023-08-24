@@ -13,10 +13,10 @@ type transferRequest struct {
 	FromAccountID int64  `json:"from_account_id" binding:"required,min=1"`
 	ToAccountID   int64  `json:"to_account_id" binding:"required,min=1"`
 	Amount        int64  `json:"amount" binding:"required,gt=0"`
-	Currency      string `json:"currency" binding:"required,oneof=USD EUR"`
+	Currency      string `json:"currency" binding:"required"`
 }
 
-func (server *Server) createTransder(ctx *gin.Context) {
+func (server *Server) createTransfer(ctx *gin.Context) {
 	var req transferRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse((err)))
@@ -53,7 +53,7 @@ func (server *Server) validAccount(ctx *gin.Context, accountID int64, currency s
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
 			return false
 		}
-
+ 
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return false
 	}
